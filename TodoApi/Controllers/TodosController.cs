@@ -24,10 +24,17 @@ namespace TodoApi.Controllers
             }
 
             todo.Id = Guid.NewGuid();
+
+            if (todo.CreatedAt == default)
+            {
+                todo.CreatedAt = DateTime.UtcNow;
+            }
+
             _todos.Add(todo);
 
             return CreatedAtAction(nameof(Get), new { id = todo.Id }, todo);
         }
+
 
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody] Todo updatedTodo)
@@ -46,9 +53,13 @@ namespace TodoApi.Controllers
 
             existingTodo.Title = updatedTodo.Title;
             existingTodo.Completed = updatedTodo.Completed;
+            existingTodo.CreatedAt = updatedTodo.CreatedAt == default
+                ? existingTodo.CreatedAt
+                : updatedTodo.CreatedAt;
 
             return Ok(existingTodo);
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
