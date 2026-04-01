@@ -17,6 +17,7 @@ This project follows a simple RESTful API structure using controllers and models
 
 **Validation and Status Codes
 **
+
 The API rejects empty title values and returns appropriate HTTP status codes such as:
 
 200 OK
@@ -25,6 +26,7 @@ The API rejects empty title values and returns appropriate HTTP status codes suc
 400 Bad Request
 
 **Technical Debt Fixes**
+
 Completed all required CRUD endpoints
 Added validation for empty todo titles
 Configured CORS to allow requests from http://localhost:5173
